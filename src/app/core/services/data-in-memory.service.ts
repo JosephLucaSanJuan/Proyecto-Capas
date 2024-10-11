@@ -26,7 +26,7 @@ export class DataInMemoryService<T extends Model> extends DataService<T> {
     }
 
     requestById(id: string): Observable<T> {
-        throw new Error("Method not implemented.");
+        return new Observable((observer)=>{})
     }
 
     update(id: string, value: T): Observable<T> {
