@@ -12,8 +12,19 @@ export class DataInMemoryService<T extends Model> extends DataService<T> {
     /*private _records:BehaviorSubject<T[]> = new BehaviorSubject<T[]>([])
     public records$:Observable<T[]> = this._records.asObservable()*/
 
+    private generarID():string {
+        const caracteres = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789"
+        let codigo = ""
+        for (let index = 0; index < 10; index++) {
+            const element = Math.floor(Math.random()*caracteres.length)
+            codigo += caracteres[element];
+        }
+        return codigo
+    }
+
     create(value: T): Observable<T> {
         return new Observable((observer)=>{
+            value.id = this.generarID()
             const _records = this._records.value;
             this._records.next([..._records, value]);
             observer.next(value)
